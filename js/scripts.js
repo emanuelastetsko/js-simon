@@ -11,38 +11,71 @@
  */
 
 
+
+// Funzione per generare un numero casuale tra 1 e 9 
+ 
+function randomNumberGenerator(max, min) {
+   return Math.floor(Math.random() * (max - min) ) + min;
+}
+
+
+
 // Ciclo che genera 5 numeri casuali 
 const div = document.querySelector("div.container");
+const numbers = [];
 for (let index = 0; index < 5; index++) {
 
-    let randomNumber = Math.floor(Math.random() * (10 - 1) ) + 1;
+    const randomNumber = randomNumberGenerator(1,9);
     console.log("randomNumber", randomNumber);
+    numbers.push(randomNumber);
 
     const newElement = document.createElement('div');
     console.log('newElement', newElement, typeof newElement);
-
     newElement.innerHTML = `${randomNumber}`;
     div.append(newElement);
+    
+}
+
+console.log("numbers", numbers);
+
+
+
+
+
+// Impostare un timer affinchè i numeri scompaiano 
+const firstTimeout = setTimeout(displayNone, 5000);
+
+function displayNone() {
+
+    document.querySelector("div").style.display = "none";
+
 }
 
 
 
 
-
-// Impostare un timer 
-
-const myTimeout = setTimeout(questionUser, 30000);
-
+// Impostare un timer per i prompt
+const secondTimeout = setTimeout (questionUser, 5100);
+const guessedNumbers = [];
 function questionUser() {
 
     alert("Ora ti verrà chiesto di inserire tutti i 5 numeri che hai visto. Mi raccomando inserisci solo un numero per volta!");
 
-    i = 1;
-    while (i < 6) {
+    for (let index = 0; index < 5; index++) {
 
-        prompt("Quale numero hai visto?")
-        i++;
+        const userInput = prompt("Inserisci un numero");
+        console.log(userInput);
 
+        if (userInput == numbers[index]){
+            guessedNumbers.push(numbers[index]);
+        }
+        
     }
-    
+
+    console.log("guessedNumbers", guessedNumbers);
+
+    const numbersCounter = document.querySelector("div.results");
+    numbersCounter.innerHTML = "Hai indovinato " + guessedNumbers.length + " numeri<br><br>";
+    numbersCounter.innerHTML += guessedNumbers;
+
 }
