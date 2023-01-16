@@ -12,16 +12,20 @@
 
 
 // Ciclo che genera 5 numeri casuali 
-let i = 0;
-while (i < 5) {
-    
+const div = document.querySelector("div.container");
+for (let index = 0; index < 5; index++) {
+
     let randomNumber = Math.floor(Math.random() * (10 - 1) ) + 1;
     console.log("randomNumber", randomNumber);
-    const numberElement = randomNumber;
-    console.log("numberElement", numberElement);
-    i++;
 
+    const newElement = document.createElement('div');
+    console.log('newElement', newElement, typeof newElement);
+
+    newElement.innerHTML = `${randomNumber}`;
+    div.append(newElement);
 }
+
+
 
 
 
